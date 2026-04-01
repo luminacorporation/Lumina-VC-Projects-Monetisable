@@ -1,0 +1,13 @@
+   "Name" : "Kaushal" ,
+   "Age" : 14,
+   "School" : "Manly Selective High School" ,
+   "Interests" : ["Playing Video Games", "Mathematics", "Physics", "Coding"] ,
+   "Gender" : "Male" ,
+   "Nationality" : "Indian" ,
+   "Favourite Food" : "Chicken Biryani" ,
+   "Favourite Drink" : "Water" ,
+   "Favourite Colour" : "Red" ,
+   "Favourite Sport" : "Cricket" ,
+   "Sports played" : ["Football", "Badminton", "Cricket"] ,
+   "Location" : "Sydney, Australia" ,
+   "Phone Number" : "+61435470201"

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IRONCODE — Coding Club</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">&lt;IRONCODE/&gt;</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#lessons">Lessons</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#join">Join</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger">☰</button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#lessons" onclick="closeMenu()">Lessons</a>
+    <a href="#projects" onclick="closeMenu()">Projects</a>
+    <a href="#join" onclick="closeMenu()">Join</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-tag">// Welcome to the Club</p>
+      <h1 class="hero-title">Learn to <span class="accent">Code.</span><br>Build Real <span class="accent">Stuff.</span></h1>
+      <p class="hero-sub">
+        IRONCODE is the school coding club for <strong>complete beginners</strong>.<br>
+        We learn HTML, CSS, JavaScript &amp; Python — together, step by step.
+      </p>
+      <div class="hero-cta">
+        <a href="#join" class="btn-primary">JOIN NOW</a>
+        <a href="#lessons" class="btn-ghost">See Lessons →</a>
+      </div>
+    </div>
+
+    <!-- Terminal decoration -->
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="terminal-title">ironcode ~ terminal</span>
+      </div>
+      <div class="terminal-body">
+        <p><span class="prompt">$</span> print("Hello, World!")</p>
+        <p class="output">Hello, World!</p>
+        <p><span class="prompt">$</span> <span class="blink">_</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <p class="section-tag">// 01 — About</p>
+    <h2>What is <span class="accent">IRONCODE?</span></h2>
+    <p class="section-sub">A school coding club built for beginners. No experience needed — just curiosity.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">📖</div>
+        <h3>Learn Together</h3>
+        <p>We go through lessons as a group — so if you're stuck, someone's got you.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔨</div>
+        <h3>Build Real Projects</h3>
+        <p>Games, websites, tools — you'll finish the term with things you actually made.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚀</div>
+        <h3>Level Up Fast</h3>
+        <p>Each lesson builds on the last. By the end, you'll be writing real code confidently.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSONS -->
+  <section class="section dark" id="lessons">
+    <p class="section-tag">// 02 — Lessons</p>
+    <h2>This Term's <span class="accent">Lessons</span></h2>
+    <p class="section-sub">Every lesson has clear goals. Click to open.</p>
+
+    <div class="lessons-list">
+
+      <div class="lesson-item done">
+        <div class="lesson-num">01</div>
+        <div class="lesson-info">
+          <h4>Intro to HTML</h4>
+          <p>What is a webpage? How do we structure one? Tags, elements, and your first page.</p>
+        </div>
+        <span class="lesson-badge done-badge">✓ Done</span>
+      </div>
+
+      <div class="lesson-item done">
+        <div class="lesson-num">02</div>
+        <div class="lesson-info">
+          <h4>Styling with CSS</h4>
+          <p>Colours, fonts, boxes. Making things look good with CSS rules.</p>
+        </div>
+        <span class="lesson-badge done-badge">✓ Done</span>
+      </div>
+
+      <div class="lesson-item active">
+        <div class="lesson-num">03</div>
+        <div class="lesson-info">
+          <h4>JavaScript Basics</h4>
+          <p>Variables, functions, and making your page actually do things.</p>
+        </div>
+        <span class="lesson-badge active-badge">▶ Now</span>
+      </div>
+
+      <div class="lesson-item">
+        <div class="lesson-num">04</div>
+        <div class="lesson-info">
+          <h4>Build a Browser Game</h4>
+          <p>Putting it all together — we build a game from scratch.</p>
+        </div>
+        <span class="lesson-badge upcoming-badge">Soon</span>
+      </div>
+
+      <div class="lesson-item">
+        <div class="lesson-num">05</div>
+        <div class="lesson-info">
+          <h4>Intro to Python</h4>
+          <p>A different language, same logic. Great for data, automation, and backend.</p>
+        </div>
+        <span class="lesson-badge upcoming-badge">Soon</span>
+      </div>
+
+      <div class="lesson-item">
+        <div class="lesson-num">06</div>
+        <div class="lesson-info">
+          <h4>Final Project</h4>
+          <p>Groups pick a project, build it, and present it. Real stuff.</p>
+        </div>
+        <span class="lesson-badge upcoming-badge">End of Term</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <p class="section-tag">// 03 — Projects</p>
+    <h2>What We're <span class="accent">Building</span></h2>
+    <p class="section-sub">Hands-on projects every member works on.</p>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-lang">HTML + CSS</div>
+        <h3>Personal Profile Page</h3>
+        <p>Your first webpage — a simple page about you, styled your way.</p>
+        <div class="project-status done-badge">Completed</div>
+      </div>
+      <div class="project-card highlight">
+        <div class="project-lang">JavaScript</div>
+        <h3>Click Counter Game</h3>
+        <p>A simple interactive game — buttons, scores, timers. Real JS in action.</p>
+        <div class="project-status active-badge">In Progress</div>
+      </div>
+      <div class="project-card">
+        <div class="project-lang">Python</div>
+        <h3>Quiz App</h3>
+        <p>A command-line quiz game. Great intro to Python logic and loops.</p>
+        <div class="project-status upcoming-badge">Up Next</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section class="section dark join-section" id="join">
+    <p class="section-tag">// 04 — Join</p>
+    <h2>Ready to <span class="accent">Join?</span></h2>
+    <p class="section-sub">No experience needed. Just show up and we'll handle the rest.</p>
+
+    <div class="join-box">
+      <div class="join-info">
+        <div class="info-row"><span class="info-icon">📅</span><div><strong>When:</strong><br>Every Wednesday, Lunch Break</div></div>
+        <div class="info-row"><span class="info-icon">📍</span><div><strong>Where:</strong><br>Room 14 — Computer Lab</div></div>
+        <div class="info-row"><span class="info-icon">💻</span><div><strong>Bring:</strong><br>Just yourself. Laptops provided.</div></div>
+        <div class="info-row"><span class="info-icon">🎯</span><div><strong>Level:</strong><br>Total beginners welcome</div></div>
+      </div>
+      <div class="join-form">
+        <h3>Sign Up</h3>
+        <input type="text" id="nameInput" placeholder="Your Name" />
+        <input type="text" id="yearInput" placeholder="Your Year Group" />
+        <button class="btn-primary" id="signupBtn" onclick="signup()">COUNT ME IN</button>
+        <p class="form-msg" id="formMsg"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&lt;IRONCODE/&gt; — School Coding Club</p>
+    <p class="footer-sub">Built by students. For students.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
