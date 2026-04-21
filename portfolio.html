@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaushal Mishra — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050810;
+    --bg2: #080d1a;
+    --surface: rgba(255,255,255,0.04);
+    --surface2: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --accent: #4af0c8;
+    --accent2: #7b6fff;
+    --accent3: #ff6b6b;
+    --text: #e8eaf0;
+    --text2: #8b92aa;
+    --text3: #555e78;
+    --glow: rgba(74,240,200,0.15);
+    --glow2: rgba(123,111,255,0.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 4rem;
+    background: rgba(5,8,16,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--text2); transition: all 0.3s; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(74,240,200,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,240,200,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  }
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .hero-orb-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(74,240,200,0.12), transparent 70%);
+    top: -100px; right: -100px;
+    animation: float1 8s ease-in-out infinite;
+  }
+  .hero-orb-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(123,111,255,0.1), transparent 70%);
+    bottom: 0; left: 10%;
+    animation: float2 10s ease-in-out infinite;
+  }
+  @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,30px)} }
+  @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,-20px)} }
+
+  .hero-inner { position: relative; z-index: 1; max-width: 900px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    background: rgba(74,240,200,0.08);
+    border: 1px solid rgba(74,240,200,0.2);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before { content: '◉'; font-size: 0.6rem; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 0.4rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-name span { color: var(--accent); }
+
+  .hero-tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    color: var(--text2);
+    letter-spacing: 0.08em;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-desc {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    color: var(--text2);
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .hero-desc strong { color: var(--text); }
+
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--accent);
+    color: #050810;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: all 0.25s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(74,240,200,0.3); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--border2);
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+    margin-top: 0.3rem;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 4rem; position: relative; }
+  .section-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text3);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+  }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+  }
+  h2 span { color: var(--accent); }
+  .section-sub {
+    font-size: 1rem;
+    color: var(--text2);
+    max-width: 520px;
+    margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--bg2); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--text2);
+    margin-bottom: 1.2rem;
+    font-size: 1.02rem;
+    line-height: 1.9;
+  }
+  .about-text p strong { color: var(--text); }
+  .about-pills {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    margin-top: 2rem;
+  }
+  .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+  .pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(74,240,200,0.05); }
+  .pill.accent { border-color: rgba(74,240,200,0.3); color: var(--accent); background: rgba(74,240,200,0.06); }
+  .about-sidebar { display: flex; flex-direction: column; gap: 1rem; }
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    transition: border-color 0.2s;
+  }
+  .info-card:hover { border-color: var(--border2); }
+  .info-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .info-card-val {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .info-card-val.accent { color: var(--accent); }
+
+  /* ── CARDS ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.8rem 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: rgba(74,240,200,0.08);
+    border: 1px solid rgba(74,240,200,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+  .card-icon.purple { background: rgba(123,111,255,0.08); border-color: rgba(123,111,255,0.15); }
+  .card-icon.red { background: rgba(255,107,107,0.08); border-color: rgba(255,107,107,0.15); }
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.7rem;
+  }
+  .card p { color: var(--text2); font-size: 0.92rem; line-height: 1.7; margin-bottom: 0.6rem; }
+  .card-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    margin-top: 0.8rem;
+    transition: gap 0.2s;
+  }
+  .card-link:hover { gap: 0.7rem; }
+  .card-link::after { content: '→'; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.04);
+    color: var(--text3);
+    letter-spacing: 0.04em;
+  }
+  .tag.accent { background: rgba(74,240,200,0.08); color: var(--accent); }
+  .tag.purple { background: rgba(123,111,255,0.08); color: var(--accent2); }
+
+  /* ── IMG PLACEHOLDER ── */
+  .img-placeholder {
+    width: 100%; height: 180px;
+    background: linear-gradient(135deg, rgba(74,240,200,0.05), rgba(123,111,255,0.05));
+    border: 1px dashed var(--border2);
+    border-radius: 10px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+  }
+  .img-placeholder .icon { font-size: 2rem; opacity: 0.4; }
+
+  /* ── SOFTWARE SECTION ── */
+  #software { background: var(--bg2); }
+  .software-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+  .sw-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .sw-card:hover { transform: translateY(-4px); border-color: var(--border2); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .sw-card-header {
+    padding: 1.6rem 1.8rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+  }
+  .sw-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+  }
+  .sw-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text3);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .sw-card-body { padding: 1.4rem 1.8rem; }
+  .sw-card-body p { color: var(--text2); font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.8rem; }
+  .sw-meta { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+  .sw-meta-row { display: flex; gap: 0.5rem; align-items: baseline; }
+  .sw-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    min-width: 70px;
+  }
+  .sw-meta-val { font-size: 0.85rem; color: var(--text); }
+  .sw-card-footer {
+    padding: 1rem 1.8rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .sw-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .sw-link:hover { gap: 0.7rem; }
+  .sw-link::after { content: '↗'; }
+  .sw-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text3);
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--accent), var(--accent2), transparent);
+  }
+  .timeline-item {
+    position: relative;
+    padding: 0 0 2.5rem 2rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.5s;
+  }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-dot {
+    position: absolute;
+    left: -2rem;
+    top: 0.3rem;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(74,240,200,0.5);
+    margin-left: -4px;
+  }
+  .timeline-org {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .timeline-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.6rem;
+  }
+  .timeline-desc { color: var(--text2); font-size: 0.9rem; }
+
+  /* ── ACHIEVEMENTS ── */
+  .achieve-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .achieve-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+    transition: all 0.25s;
+  }
+  .achieve-card:hover { border-color: var(--border2); background: var(--surface2); }
+  .achieve-emoji { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .achieve-text h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.01em;
+  }
+  .achieve-text p { color: var(--text2); font-size: 0.82rem; line-height: 1.5; }
+
+  /* ── ENTREPRENEURSHIP HIGHLIGHT ── */
+  .lumina-card {
+    background: linear-gradient(135deg, rgba(74,240,200,0.04), rgba(123,111,255,0.04));
+    border: 1px solid rgba(74,240,200,0.2);
+    border-radius: 16px;
+    padding: 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .lumina-card::after {
+    content: '';
+    position: absolute;
+    top: -50%; right: -10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(74,240,200,0.06), transparent 70%);
+    pointer-events: none;
+  }
+  .lumina-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    background: rgba(74,240,200,0.1);
+    border: 1px solid rgba(74,240,200,0.25);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .lumina-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  .lumina-card h3 span { color: var(--accent); }
+  .lumina-card p { color: var(--text2); max-width: 600px; line-height: 1.8; font-size: 0.97rem; }
+  .lumina-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .lumina-point {
+    display: flex; align-items: flex-start; gap: 0.8rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.2rem;
+  }
+  .lumina-point-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .lumina-point-text { font-size: 0.86rem; color: var(--text2); line-height: 1.5; }
+  .lumina-point-text strong { color: var(--text); display: block; font-size: 0.9rem; margin-bottom: 0.2rem; font-family: 'Syne', sans-serif; }
+
+  /* ── PERSONAL STATEMENT ── */
+  #statement { background: var(--bg2); }
+  .statement-teaser {
+    font-size: 1.05rem;
+    color: var(--text2);
+    line-height: 1.9;
+    max-width: 700px;
+    margin-bottom: 1.5rem;
+  }
+  .statement-full {
+    display: none;
+    overflow: hidden;
+  }
+  .statement-full.open {
+    display: block;
+    animation: expand 0.4s ease;
+  }
+  @keyframes expand {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .statement-full p {
+    color: var(--text2);
+    font-size: 1.02rem;
+    line-height: 1.9;
+    max-width: 700px;
+    margin-bottom: 1.2rem;
+  }
+  .statement-full p strong { color: var(--text); }
+
+  /* ── FINANCE / SPORTS ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+  /* ── UNIVERSITY EXPOSURE ── */
+  .uni-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .uni-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.6rem;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .uni-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .uni-card:hover { border-color: var(--border2); }
+  .uni-card:hover::after { opacity: 1; }
+  .uni-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .uni-detail { color: var(--text2); font-size: 0.85rem; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 3rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--accent);
+  }
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: rgba(5,8,16,0.97);
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      gap: 1.2rem;
+      z-index: 99;
+    }
+    .hamburger { display: flex; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 4rem; }
+    .hero-stats { gap: 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    .lumina-card { padding: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">KM</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#engineering">Engineering</a></li>
+    <li><a href="#software">Software</a></li>
+    <li><a href="#entrepreneurship">Ventures</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+    <li><a href="#statement">Statement</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Early Entry Portfolio · Sydney, Australia</div>
+    <h1 class="hero-name">Kaushal<br><span>Mishra</span></h1>
+    <p class="hero-tagline">STUDENT ENGINEER &nbsp;/&nbsp; DEVELOPER &nbsp;/&nbsp; ENTREPRENEUR</p>
+    <p class="hero-desc">
+      Building at the intersection of <strong>engineering, software, and business</strong> — not just as a student, but as a founder, developer, and maker with <strong>real-world deployments</strong> and measurable impact.
+    </p>
+    <div class="hero-ctas">
+      <a href="#software" class="btn-primary">View Projects</a>
+      <a href="#statement" class="btn-secondary">Personal Statement</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6+</div>
+        <div class="stat-label">LIVE WEB APPS</div>
+      </div>
+      <div>
+        <div class="stat-num">2</div>
+        <div class="stat-label">PHYSICAL BUILDS</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">UNI PROGRAMMES</div>
+      </div>
+      <div>
+        <div class="stat-num">~10%</div>
+        <div class="stat-label">ASX RETURN</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-tag">About</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <h2>Driven to build<br><span>things that matter</span></h2>
+      <br>
+      <p>I'm a Sydney-based student with a deep, self-directed focus on engineering, software development, and entrepreneurship. My work spans <strong>physical systems</strong> — electric vehicles, model rocketry — and <strong>digital platforms</strong> deployed and actively serving real users.</p>
+      <p>What sets me apart isn't just academic performance — it's the compulsion to <strong>turn ideas into reality</strong>. Every project I've built started with a real problem: an underserved community, an accessibility gap, a business need. I don't wait for a curriculum to show me how to build something; I figure it out and ship it.</p>
+      <p>I'm pursuing engineering and computer science because I believe the most meaningful impact comes from people who can bridge <strong>technical depth with entrepreneurial vision</strong>. That's the person I'm building myself to be.</p>
+      <div class="about-pills">
+        <span class="pill accent">Aerospace Engineering</span>
+        <span class="pill accent">Computer Science</span>
+        <span class="pill accent">Mechatronics</span>
+        <span class="pill">React / Node.js</span>
+        <span class="pill">AI Integration</span>
+        <span class="pill">Business Strategy</span>
+        <span class="pill">Leadership</span>
+        <span class="pill">Full-Stack Dev</span>
+      </div>
+    </div>
+    <div class="about-sidebar">
+      <div class="info-card">
+        <div class="info-card-label">Location</div>
+        <div class="info-card-val">Sydney, New South Wales</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Focus Degrees</div>
+        <div class="info-card-val">Engineering · CS · Mechatronics · Commerce</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Target Universities</div>
+        <div class="info-card-val">UNSW · USYD · UTS · Macquarie · UniMelb</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Business Founded</div>
+        <div class="info-card-val accent">Lumina Corporation</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Awards</div>
+        <div class="info-card-val">Duke of Edinburgh Silver · House Captain</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGINEERING PROJECTS -->
+<section id="engineering">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-tag">Engineering Projects</span>
+    <div class="section-line"></div>
+  </div>
+  <h2>Hands-on <span>Physical Builds</span></h2>
+  <p class="section-sub">Real engineering — designed, fabricated, and tested from scratch. No kits, no shortcuts.</p>
+  <div class="cards-grid reveal">
+
+    <!-- Electric Go-Kart -->
+    <div class="card">
+      <!-- IMAGE PLACEHOLDER: Replace with actual go-kart photo -->
+      <div class="img-placeholder">
+        <span class="icon">🏎️</span>
+        <span>[ Photo: Electric Go-Kart ]</span>
+      </div>
+      <div class="card-icon">⚡</div>
+      <h3>Electric Go-Kart</h3>
+      <p>Designed and built a fully functional electric go-kart from the ground up. The project required deep integration of <strong>mechanical engineering</strong>, electrical power systems, drive train mechanics, and energy management.</p>
+      <p>Navigated real engineering constraints: weight distribution, motor torque curves, battery capacity vs performance, chassis rigidity. A physical proof of engineering capability.</p>
+      <div class="tag-row">
+        <span class="tag accent">Mechanical Eng</span>
+        <span class="tag accent">Electrical Systems</span>
+        <span class="tag">Energy Transfer</span>
+        <span class="tag">Drive Trains</span>
+        <span class="tag">Fabrication</span>
+      </div>
+    </div>
+
+    <!-- Model Rocket -->
+    <div class="card">
+      <!-- IMAGE PLACEHOLDER: Replace with actual rocket photo -->
+      <div class="img-placeholder">
+        <span class="icon">🚀</span>
+        <span>[ Photo: Model Rocket Launch ]</span>
+      </div>
+      <div class="card-icon purple">🚀</div>
+      <h3>Model Rocket</h3>
+      <p>Designed and launched a model rocket, applying principles of <strong>aerodynamics, propulsion physics, and flight stability</strong>. Calculated centre of pressure and gravity ratios, engineered fin geometry for stable flight, and selected appropriate propellant specifications.</p>
+      <p>This project represents a direct gateway into aerospace engineering — understanding how thrust, drag, and gravity interact across a flight envelope.</p>
+      <div class="tag-row">
+        <span class="tag purple">Aerospace</span>
+        <span class="tag purple">Aerodynamics</span>
+        <span class="tag">Propulsion</span>
+        <span class="tag">Physics</span>
+        <span class="tag">Flight Stability</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SOFTWARE -->
+<section id="software">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-tag">Software Development</span>
+    <div class="section-line"></div>
+  </div>
+  <h2>Full-Stack Development<br><span>&amp; Technical Portfolio</span></h2>
+  <p class="section-sub">Six live, deployed web applications — each solving a real problem, each built independently.</p>
+
+  <div class="software-grid reveal">
+
+    <!-- MishTech -->
+    <div class="sw-card">
+      <div class="sw-card-header">
+        <div class="sw-card-title">MishTech</div>
+        <span class="sw-num">01</span>
+      </div>
+      <div class="sw-card-body">
+        <p>A technology-focused platform that acts as a deployable demonstration of full-stack development capability. Built to prove real-world competence beyond school assignments.</p>
+        <div class="sw-meta">
+          <div class="sw-meta-row"><span class="sw-meta-label">Why Built</span><span class="sw-meta-val">Showcase production-grade engineering skills</span></div>
+          <div class="sw-meta-row"><span class="sw-meta-label">Goal</span><span class="sw-meta-val">Deployable, real-world system from scratch</span></div>
+        </div>
+        <div class="tag-row" style="margin-top:1rem">
+          <span class="tag accent">HTML/CSS/JS</span><span class="tag">Full-Stack</span><span class="tag">Render</span>
+        </div>
+      </div>
+      <div class="sw-card-footer">
+        <a href="https://mishtech.onrender.com" target="_blank" class="sw-link">mishtech.onrender.com</a>
+        <span class="sw-type">LIVE</span>
+      </div>
+    </div>
+
+    <!-- Mishi Math -->
+    <div class="sw-card">
+      <div class="sw-card-header">
+        <div class="sw-card-title">Mishi Math</div>
+        <span class="sw-num">02</span>
+      </div>
+      <div class="sw-card-body">
+        <p>An educational mathematics platform designed to simplify complex concepts for students. Addresses a genuine accessibility gap in engaging, student-friendly maths resources.</p>
+        <div class="sw-meta">
+          <div class="sw-meta-row"><span class="sw-meta-label">Why Built</span><span class="sw-meta-val">Improve maths accessibility for students</span></div>
+          <div class="sw-meta-row"><span class="sw-meta-label">Goal</span><span class="sw-meta-val">Reduce learning friction for complex topics</span></div>
+        </div>
+        <div class="tag-row" style="margin-top:1rem">
+          <span class="tag accent">Education Tech</span><span class="tag">Vercel</span><span class="tag">Interactive UI</span>
+        </div>
+      </div>
+      <div class="sw-card-footer">
+        <a href="https://mishi-math.vercel.app" target="_blank" class="sw-link">mishi-math.vercel.app</a>
+        <span class="sw-type">LIVE</span>
+      </div>
+    </div>
+
+    <!-- MishPlayz Hub -->
+    <div class="sw-card">
+      <div class="sw-card-header">
+        <div class="sw-card-title">MishPlayz Hub</div>
+        <span class="sw-num">03</span>
+      </div>
+      <div class="sw-card-body">
+        <p>A personal and project hub that centralises digital presence, content, and work. Built to create a single coherent identity across multiple domains of interest.</p>
+        <div class="sw-meta">
+          <div class="sw-meta-row"><span class="sw-meta-label">Why Built</span><span class="sw-meta-val">Centralise projects and digital identity</span></div>
+          <div class="sw-meta-row"><span class="sw-meta-label">Goal</span><span class="sw-meta-val">Unified platform for all content & presence</span></div>
+        </div>
+        <div class="tag-row" style="margin-top:1rem">
+          <span class="tag accent">Platform</span><span class="tag">Vercel</span><span class="tag">JS</span>
+        </div>
+      </div>
+      <div class="sw-card-footer">
+        <a href="https://mishplayz-hub.vercel.app" target="_blank" class="sw-link">mishplayz-hub.vercel.app</a>
+        <span class="sw-type">LIVE</span>
+      </div>
+    </div>
+
+    <!-- Syntherion AI -->
+    <div class="sw-card">
+      <div class="sw-card-header">
+        <div class="sw-card-title">Syntherion AI</div>
+        <span class="sw-num">04</span>
+      </div>
+      <div class="sw-card-body">
+        <p>An AI-integrated web application exploring how artificial intelligence can be embedded into real consumer products. Demonstrates capability in modern AI API integration and UX design.</p>
+        <div class="sw-meta">
+          <div class="sw-meta-row"><span class="sw-meta-label">Why Built</span><span class="sw-meta-val">Explore AI in real consumer products</span></div>
+          <div class="sw-meta-row"><span class="sw-meta-label">Goal</span><span class="sw-meta-val">Production-ready AI integration</span></div>
+        </div>
+        <div class="tag-row" style="margin-top:1rem">
+          <span class="tag accent">AI Integration</span><span class="tag purple">Machine Learning</span><span class="tag">Render</span>
+        </div>
+      </div>
+      <div class="sw-card-footer">
+        <a href="https://syntherion-ai.onrender.com" target="_blank" class="sw-link">syntherion-ai.onrender.com</a>
+        <span class="sw-type">LIVE</span>
+      </div>
+    </div>
+
+    <!-- Studium -->
+    <div class="sw-card">
+      <div class="sw-card-header">
+        <div class="sw-card-title">Studium</div>
+        <span class="sw-num">05</span>
+      </div>
+      <div class="sw-card-body">
+        <p>An education-focused platform built to improve learning accessibility and academic organisation for students. Addresses fragmented, hard-to-navigate online learning resources.</p>
+        <div class="sw-meta">
+          <div class="sw-meta-row"><span class="sw-meta-label">Why Built</span><span class="sw-meta-val">Improve accessibility of quality education</span></div>
+          <div class="sw-meta-row"><span class="sw-meta-label">Goal</span><span class="sw-meta-val">Structured, navigable learning platform</span></div>
+        </div>
+        <div class="tag-row" style="margin-top:1rem">
+          <span class="tag accent">EdTech</span><span class="tag">Full-Stack</span><span class="tag">Render</span>
+        </div>
+      </div>
+      <div class="sw-card-footer">
+        <a href="https://studium-e4ax.onrender.com" target="_blank" class="sw-link">studium-e4ax.onrender.com</a>
+        <span class="sw-type">LIVE</span>
+      </div>
+    </div>
+
+    <!-- MSCC -->
+    <div class="sw-card">
+      <div class="sw-card-header">
+        <div class="sw-card-title">MS Coding Club</div>
+        <span class="sw-num">06</span>
+      </div>
+      <div class="sw-card-body">
+        <p>The official website for my school's coding club — a community I founded. Built to increase student engagement with programming and create a visible, professional home for the club's activities.</p>
+        <div class="sw-meta">
+          <div class="sw-meta-row"><span class="sw-meta-label">Why Built</span><span class="sw-meta-val">Promote coding culture in school</span></div>
+          <div class="sw-meta-row"><span class="sw-meta-label">Goal</span><span class="sw-meta-val">Increase student engagement & visibility</span></div>
+        </div>
+        <div class="tag-row" style="margin-top:1rem">
+          <span class="tag accent">Community</span><span class="tag">School Initiative</span><span class="tag">Render</span>
+        </div>
+      </div>
+      <div class="sw-card-footer">
+        <a href="https://mscc.onrender.com" target="_blank" class="sw-link">mscc.onrender.com</a>
+        <span class="sw-type">LIVE</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REAL WORLD IMPACT -->
+<section id="impact">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-tag">Real-World Impact</span>
+    <div class="section-line"></div>
+  </div>
+  <h2>Client Work &amp; <span>Community Impact</span></h2>
+  <p class="section-sub">Beyond personal projects — deploying technology for real organisations and real people.</p>
+  <div class="cards-grid reveal">
+
+    <div class="card">
+      <div class="card-icon red">🕉️</div>
+      <h3>AI Chatbot — Sanatan Dharma Bhawan Temple</h3>
+      <p>Built and deployed an AI-powered chatbot for the <strong>Sanatan Dharma Bhawan Temple, Artarmon</strong> — a real, operating community organisation.</p>
+      <p>Improved accessibility for temple visitors: answering queries about events, services, and information 24/7. A direct demonstration of applying AI technology to serve a genuine community need.</p>
+      <div class="tag-row">
+        <span class="tag accent">AI Deployment</span>
+        <span class="tag">Chatbot</span>
+        <span class="tag">Community Tech</span>
+        <span class="tag">Accessibility</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🏸</div>
+      <h3>Realm Badminton — Client Website</h3>
+      <p>Designed and built the full website for <strong>Realm Badminton</strong>, a Sydney-based badminton coaching business. Delivered a professional, multi-page static site from client brief to live deployment.</p>
+      <p>Demonstrates real client communication, requirements gathering, design translation, and delivery to a paying business stakeholder.</p>
+      <a href="https://realmbadminton.com.au" target="_blank" class="card-link">realmbadminton.com.au</a>
+      <div class="tag-row" style="margin-top:0.8rem">
+        <span class="tag accent">Client Work</span>
+        <span class="tag">Web Design</span>
+        <span class="tag">HTML/CSS/JS</span>
+        <span class="tag">GitHub Pages</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ENTREPRENEURSHIP -->
+<section id="entrepreneurship" style="background: var(--bg2);">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <span class="section-tag">Entrepreneurship</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="lumina-card reveal">
+    <div class="lumina-badge">OPERATING BUSINESS</div>
+    <h3>Lumina <span>Corporation</span></h3>
+    <p>Lumina Corporation isn't a school project or a concept — it's an <strong>actual operating business</strong> generating real revenue. Founded to provide web development services to small and medium businesses, Lumina represents my transition from student to entrepreneur.</p>
+    <div class="lumina-points">
+      <div class="lumina-point">
+        <span class="lumina-point-icon">💼</span>
+        <div class="lumina-point-text">
+          <strong>Client Web Services</strong>
+          Building websites for small businesses. Real clients, real briefs, real deliverables.
+        </div>
+      </div>
+      <div class="lumina-point">
+        <span class="lumina-point-icon">💡</span>
+        <div class="lumina-point-text">
+          <strong>Product Development</strong>
+          Developing LED and lighting-based product concepts alongside service work.
+        </div>
+      </div>
+      <div class="lumina-point">
+        <span class="lumina-point-icon">💰</span>
+        <div class="lumina-point-text">
+          <strong>Real Revenue</strong>
+          Generating income from business operations — not grant-funded, not hypothetical.
+        </div>
+      </div>
+      <div class="lumina-point">
+        <span class="lumina-point-icon">🎓</span>
+        <div class="lumina-point-text">
+          <strong>Macquarie Incubator</strong>
+          Exposure to Macquarie University's startup incubator environment and ecosystem.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <span class="section-tag">Experience</span>
+    <div class="section-line"></div>
+  </div>
+  <h2>Work &amp; <span>Industry Exposure</span></h2>
+  <p class="section-sub">Grounded in real workplaces — building professional skills beyond the classroom.</p>
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-org">Nissan — Work Experience</div>
+      <div class="timeline-role">AUTOMOTIVE · ENGINEERING · SALES</div>
+      <div class="timeline-desc">Immersive exposure to a global automotive brand — spanning vehicle engineering principles, dealership operations, and sales processes. Reinforced interest in mechanical systems and product-to-market thinking.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-org">AlphaOne</div>
+      <div class="timeline-role">TECHNOLOGY ENVIRONMENT</div>
+      <div class="timeline-desc">Direct exposure to a technology-focused environment. Observed and participated in real tech operations, gaining professional context to support self-directed development work.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-org">FlipTech</div>
+      <div class="timeline-role">BUSINESS + TECHNOLOGY</div>
+      <div class="timeline-desc">Hands-on experience at the intersection of business strategy and technology operations. Developed awareness of how technical decisions drive commercial outcomes.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-org">Hungry Jack's</div>
+      <div class="timeline-role">TEAM OPERATIONS · COMMUNICATION</div>
+      <div class="timeline-desc">Fast-paced, customer-facing work environment. Developed strong communication skills, responsibility under pressure, and the ability to collaborate effectively in structured team settings.</div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIVERSITY EXPOSURE -->
+<section id="university" style="background: var(--bg2);">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <span class="section-tag">University Exposure</span>
+    <div class="section-line"></div>
+  </div>
+  <h2>Early <span>University Engagement</span></h2>
+  <p class="section-sub">Already engaging with higher education environments — not waiting for an offer letter.</p>
+  <div class="uni-grid reveal">
+    <div class="uni-card">
+      <div class="uni-name">UNSW Sydney</div>
+      <div class="uni-detail">Experience Day participant — explored engineering and CS faculty environments, labs, and student life.</div>
+    </div>
+    <div class="uni-card">
+      <div class="uni-name">Macquarie University</div>
+      <div class="uni-detail">Experience Day participant — engaged with academic programs and campus environment.</div>
+    </div>
+    <div class="uni-card">
+      <div class="uni-name">Macquarie Incubator</div>
+      <div class="uni-detail">One-Day Program participant — exposed to the startup ecosystem, entrepreneurship frameworks, and innovation methodology at a university incubator level.</div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <span class="section-tag">Leadership &amp; Achievements</span>
+    <div class="section-line"></div>
+  </div>
+  <h2>Leading, <span>Not Following</span></h2>
+  <p class="section-sub">A track record of taking initiative and creating structures others can benefit from.</p>
+  <div class="achieve-grid reveal">
+    <div class="achieve-card">
+      <span class="achieve-emoji">🏠</span>
+      <div class="achieve-text">
+        <h4>House Captain</h4>
+        <p>Elected to lead an entire school house — demonstrating the trust of both students and staff through consistent character and initiative.</p>
+      </div>
+    </div>
+    <div class="achieve-card">
+      <span class="achieve-emoji">💻</span>
+      <div class="achieve-text">
+        <h4>Founder — Coding Club → Engineering Club</h4>
+        <p>Founded the school's coding club from nothing, grew it organically, and evolved it into a broader Engineering Club that continues today.</p>
+      </div>
+    </div>
+    <div class="achieve-card">
+      <span class="achieve-emoji">🥇</span>
+      <div class="achieve-text">
+        <h4>Duke of Edinburgh Silver Award</h4>
+        <p>Completed the rigorous Silver Award, demonstrating commitment across physical activity, skill development, volunteering, and expedition.</p>
+      </div>
+    </div>
+    <div class="achieve-card">
+      <span class="achieve-emoji">🎤</span>
+      <div class="achieve-text">
+        <h4>Year 7 Debating Team</h4>
+        <p>Selected for the school debating team. Developed structured argumentation, research rigour, and confident public communication.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCE -->
+<section id="finance" style="background: var(--bg2);">
+  <div class="section-header">
+    <span class="section-num">09</span>
+    <span class="section-tag">Finance &amp; Sports</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="two-col reveal">
+    <div>
+      <h2>Finance &amp; <span>Analytics</span></h2>
+      <br>
+      <div class="card" style="margin-bottom:1rem">
+        <div class="card-icon">📈</div>
+        <h3>ASX Sharemarket Game</h3>
+        <p>Achieved approximately a <strong>~10% return on a $50,000 virtual portfolio</strong> in the ASX Sharemarket Game — a result driven by research, sector analysis, and disciplined risk management rather than luck.</p>
+        <div class="tag-row">
+          <span class="tag accent">~10% Return</span>
+          <span class="tag">$50,000 Portfolio</span>
+          <span class="tag">ASX</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon purple">📊</div>
+        <h3>Active Paper Trading</h3>
+        <p>Actively engaged in paper trading via platforms including <strong>Plus500</strong>. Continuously developing analytical thinking, risk-reward assessment, and market pattern recognition.</p>
+        <div class="tag-row">
+          <span class="tag purple">Paper Trading</span>
+          <span class="tag">Plus500</span>
+          <span class="tag">Risk Management</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>Sports &amp; <span>Extracurriculars</span></h2>
+      <br>
+      <div class="achieve-grid" style="grid-template-columns:1fr">
+        <div class="achieve-card">
+          <span class="achieve-emoji">🏸</span>
+          <div class="achieve-text">
+            <h4>Competitive Badminton</h4>
+            <p>Active tournament competitor. Represented the sport at school and community level.</p>
+          </div>
+        </div>
+        <div class="achieve-card">
+          <span class="achieve-emoji">🏆</span>
+          <div class="achieve-text">
+            <h4>Football &amp; Cricket Trophies</h4>
+            <p>Trophy recipient every season for both football and cricket — consistent performer across team sports.</p>
+          </div>
+        </div>
+        <div class="achieve-card">
+          <span class="achieve-emoji">🏊</span>
+          <div class="achieve-text">
+            <h4>Swimming, Athletics &amp; Cross-Country</h4>
+            <p>Regular participant in school carnivals across swimming, athletics, and cross-country events.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL STATEMENT -->
+<section id="statement">
+  <div class="section-header">
+    <span class="section-num">10</span>
+    <span class="section-tag">Personal Statement</span>
+    <div class="section-line"></div>
+  </div>
+  <h2>In My <span>Own Words</span></h2>
+  <br>
+  <p class="statement-teaser">
+    I've always been drawn to questions that don't have clean answers — how do you make something fly? How do you turn an idea into a business? How do you build software that actually helps people? What excites me about engineering is that these questions demand you to be technically capable <em>and</em> creatively relentless at the same time.
+  </p>
+
+  <button class="btn-secondary" id="statementBtn" onclick="toggleStatement()">Read Full Statement</button>
+
+  <div class="statement-full" id="statementFull">
+    <br><br>
+    <p>Growing up in Sydney, I was always the kid who needed to know how things worked — not from a textbook, but by taking them apart and trying to put them back together differently. That instinct eventually grew into something more structured: I started building. I built an electric go-kart from scratch, working through the physics of motor selection, the practicalities of battery placement, and the humbling reality that real engineering involves a lot of failure before it works. I designed and launched a model rocket, calculating aerodynamic stability before I'd ever formally studied fluid dynamics. I didn't wait for school to teach me these things.</p>
+    <p>At the same time, I started building software. Today I have <strong>six live, deployed web applications</strong> — platforms for education, AI integration, student communities, and commercial use. I built a chatbot for a real temple in Artarmon and a full website for a coaching business in Sydney. These weren't hypothetical; they were real deployments for real users. I founded a business, Lumina Corporation, which generates actual revenue from web development services. I'm not describing what I plan to do — I'm describing what I'm already doing.</p>
+    <p>What draws me to engineering at university isn't just the subject matter — it's the rigour. I want to be in an environment where the problems are hard enough that you can't brute-force your way through them. I want to learn thermodynamics properly, understand structural analysis at depth, and develop the kind of systems thinking that lets you see how all the pieces fit together. I want to study alongside people who are just as driven, and to have access to the facilities, mentorship, and networks that will let me do work that matters at scale.</p>
+    <p>Entrepreneurship isn't a side interest for me — it's how I think about everything. Every project I build starts with "what problem does this solve?" and ends with "how do you grow it?" The Macquarie Incubator experience showed me that university isn't just about credentials; it's about being embedded in an ecosystem of people building serious things. That's where I want to be.</p>
+    <p><strong>I'm not applying to university to find out what I'm capable of. I already know I'll build whatever I put my mind to. I'm applying because I want to operate at the highest possible level — and that requires the best possible foundation.</strong></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Kaushal Mishra</div>
+  <div class="footer-copy">SYDNEY, AUSTRALIA · EARLY ENTRY PORTFOLIO · 2025</div>
+</footer>
+
+<script>
+  // NAV
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  // STATEMENT TOGGLE
+  function toggleStatement() {
+    const full = document.getElementById('statementFull');
+    const btn = document.getElementById('statementBtn');
+    if (full.classList.contains('open')) {
+      full.classList.remove('open');
+      btn.textContent = 'Read Full Statement';
+    } else {
+      full.classList.add('open');
+      btn.textContent = 'Collapse Statement';
+    }
+  }
+
+  // SCROLL REVEAL
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
